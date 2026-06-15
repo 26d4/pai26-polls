@@ -40,10 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	"rest_framework",
     "django_eventstream",
+	"corsheaders",
 	"polls_api",
 ]
 
 MIDDLEWARE = [
+	"corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -118,6 +120,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = 'polls_api.AppUser'
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:5173',
+    'http://localhost:8000'
+]
 
 
 # Internationalization
