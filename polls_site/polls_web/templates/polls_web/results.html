@@ -29,7 +29,7 @@
 <script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
 <script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
 <script type="text/javascript">
-	var es = new ReconnectingEventSource('/api/events/poll-vote-update-{{ question.pk }}/');
+	var es = new ReconnectingEventSource('{% url "polls_api:events-list" %}poll-vote-update-{{ question.pk }}/');
 
 	es.addEventListener('message', function (e) {
 		data = JSON.parse(e.data);
