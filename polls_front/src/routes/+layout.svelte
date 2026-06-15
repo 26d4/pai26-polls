@@ -11,7 +11,7 @@
 
 <nav>
 	<a href={resolve('/')}>Home</a>
-	<a href={resolve("/poll/new")}>New Poll</a>
+	<!-- <a href={resolve("/poll/new")}>New Poll</a> -->
 	<a href={resolve("/login")}>Login</a>
 </nav>
 
