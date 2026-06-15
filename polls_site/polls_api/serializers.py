@@ -21,7 +21,7 @@ class PollQuestionWithChoicesSerializer(PollQuestionSerializer):
 
 	def create(self, validated_data):
 		choices = validated_data.pop('choices')
-		print(choices)
+
 		question = PollQuestion.objects.create(**validated_data)
 		for choice in choices:
 			PollChoice.objects.create(question=question, **choice)

@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.exceptions import ParseError
+from django_eventstream import send_event
 
 
 class PollListView(generics.ListAPIView):
@@ -32,6 +33,7 @@ def poll_vote_cast(request, id):
 
 		choice.votes = F('votes') + 1
 		choice.save()
+		send_event(f'poll-vote-update-{id}', 'message', {'choice': choice.pk, 'votes': choice.votes})
 		return Response(status=204)
 	
 

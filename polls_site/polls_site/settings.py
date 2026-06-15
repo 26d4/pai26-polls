@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+	"daphne",
     'django.contrib.staticfiles',
 	"rest_framework",
+    "django_eventstream",
 	"polls_api",
 ]
 
@@ -68,7 +70,18 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = "polls_site.asgi.application"
 WSGI_APPLICATION = 'polls_site.wsgi.application'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'django_eventstream.renderers.SSEEventRenderer',
+        'django_eventstream.renderers.BrowsableAPIEventStreamRenderer'
+    ]
+}
 
 
 # Database
