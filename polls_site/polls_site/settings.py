@@ -80,6 +80,10 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
         'django_eventstream.renderers.SSEEventRenderer',
         'django_eventstream.renderers.BrowsableAPIEventStreamRenderer'
+    ],
+	'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ]
 }
 

@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.exceptions import ParseError
+from rest_framework.permissions import IsAuthenticated
 from django_eventstream import send_event
 
 
@@ -39,3 +40,4 @@ def poll_vote_cast(request, id):
 
 class PollCreateView(generics.CreateAPIView):
 	serializer_class = PollQuestionWithChoicesSerializer
+	permission_classes = [IsAuthenticated]
