@@ -1,0 +1,41 @@
+{% extends 'polls_web/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>{{ question.question_text }}</h1>
+
+{% if question.has_expired %}
+<p>Voting has concluded</p>
+{% endif %}
+
+<table>
+<thead>
+	<th>Choice</th>
+	<th>Votes</th>
+</thead>
+<tbody>
+{% for choice in question.choices.all %}
+	<tr>
+		<td>{{ choice.choice_text }}</td>
+		<td id="choice-vote-counter-{{ choice.pk }}">{{ choice.votes }}</td>
+	</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
+<script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
+<script type="text/javascript">
+	var es = new ReconnectingEventSource('/api/events/poll-vote-update-{{ question.pk }}/');
+
+	es.addEventListener('message', function (e) {
+		data = JSON.parse(e.data);
+		choice = data.choice;
+		votes = data.votes;
+		document.getElementById("choice-vote-counter-" + choice).innerText = votes.toString();
+	}, false);
+</script>
+{% endblock scripts %}

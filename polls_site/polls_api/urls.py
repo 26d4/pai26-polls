@@ -10,6 +10,7 @@ router.register(
 	'events'
 )
 
+app_name = 'polls_api'
 urlpatterns = [
 	path('polls/', views.PollListView.as_view(), name='api-poll-list'),
 	path('poll/<int:pk>/', views.PollView.as_view(), name='api-poll'),

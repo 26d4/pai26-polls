@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django_eventstream",
 	"corsheaders",
 	"polls_api",
+	"polls_web"
 ]
 
 MIDDLEWARE = [
