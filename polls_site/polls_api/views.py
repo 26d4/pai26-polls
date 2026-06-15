@@ -47,6 +47,13 @@ class LoginView(generics.GenericAPIView):
 		return Response(data)
 
 
+class MeView(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+
+    def get_object(self): # type: ignore
+        return self.request.user
+
+
 @api_view(['POST'])
 def api_logout(request):
 	logout(request)

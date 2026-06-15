@@ -1,8 +1,8 @@
-import { getCSRFHeader, SHARED_FETCH_OPT } from "./shared"
+import { getCSRFHeader, SHARED_FETCH_OPT, API_URL_BASE, getCurrentUser } from "./shared"
 
 export async function login(username:string, password:string) {
 	const response = await fetch(
-		'http://localhost:8000/api/login/',
+		API_URL_BASE + 'login/',
 		{
 			method: 'POST',
 			body: JSON.stringify({username, password}),
@@ -19,7 +19,7 @@ export async function login(username:string, password:string) {
 
 export async function logout() {
 	const response =  await fetch(
-		'http://localhost:8000/api/logout/',
+		API_URL_BASE + 'logout/',
 		{
 			method: 'POST',
 			...SHARED_FETCH_OPT,
