@@ -33,3 +33,7 @@ def poll_vote_cast(request, id):
 		choice.votes = F('votes') + 1
 		choice.save()
 		return Response(status=204)
+	
+
+class PollCreateView(generics.CreateAPIView):
+	serializer_class = PollQuestionWithChoicesSerializer
