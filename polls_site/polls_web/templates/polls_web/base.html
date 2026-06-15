@@ -8,8 +8,15 @@
 <body>
 	<nav>
 		<a href="{% url 'polls_web:index' %}">Home</a>
-		{% comment %} <a href="{% url 'polls_web:new' %}">New Poll</a>
-		<a href="{% url 'polls_web:login' %}">Log in</a> {% endcomment %}
+		{% if user.is_authenticated %}
+		{% comment %} <a href="{% url 'polls_web:new' %}">New Poll</a> {% endcomment %}
+		<form method="post" action="{% url 'polls_web:logout' %}">
+			{% csrf_token %}
+			<button type="submit">Log out</button>
+		</form>
+		{% else %}
+		<a href="{% url 'polls_web:login' %}">Log in</a>
+		{% endif %}
 	</nav>
 
 	<div id="content">

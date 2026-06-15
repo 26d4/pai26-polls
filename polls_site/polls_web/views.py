@@ -1,7 +1,13 @@
 from django.shortcuts import redirect
 from django.views import generic
+import django.contrib.auth.views as auth_views
 
 from polls_api.models import PollQuestion
+
+
+class LoginView(auth_views.LoginView):
+	template_name = 'polls_web/login.html'
+	redirect_authenticated_user = True
 
 
 class IndexView(generic.ListView):
