@@ -7,6 +7,7 @@ urlpatterns = [
 	path('', views.IndexView.as_view(), name='index'),
 	path('poll/<int:pk>', views.DetailView.as_view(), name='detail'),
 	path('poll/<int:pk>/results', views.ResultsView.as_view(), name='results'),
+	path('poll/<int:pk>/vote', views.vote_cast, name='vote-cast'), # type: ignore
 	path('login', views.LoginView.as_view(), name='login'),
-	path('logout', auth_views.LogoutView.as_view(), name='logout')
+	path('logout', auth_views.LogoutView.as_view(), name='logout'),
 ]

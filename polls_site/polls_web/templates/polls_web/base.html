@@ -1,13 +1,18 @@
+{% load django_htmx %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<link rel="stylesheet" href="style.css">
 	<title>{% block title %}Polls{% endblock %}</title>
+	{% htmx_script %}
 </head>
 
-<body>
+<body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
 	<nav>
-		<a href="{% url 'polls_web:index' %}">Home</a>
+		<div hx-boost="true" hx-target="#content">
+			<a href="{% url 'polls_web:index' %}">Home</a>
+		</div>
 		{% if user.is_authenticated %}
 		{% comment %} <a href="{% url 'polls_web:new' %}">New Poll</a> {% endcomment %}
 		<form method="post" action="{% url 'polls_web:logout' %}">
@@ -22,6 +27,5 @@
 	<div id="content">
 		{% block content %}{% endblock %}
 	</div>
-	{% block scripts %}{% endblock scripts %}
 </body>
 </html>

@@ -1,6 +1,6 @@
 {% extends "polls_web/base.html" %}
 
-{% block content %}
+{% partialdef content %}
 {% if latest_questions %}
 	<h1>Latest Polls</h1>
 
@@ -10,7 +10,7 @@
 		<th>Published</th>
 		<th>Expires</th>
 	</thead>
-	<tbody>
+	<tbody hx-boost="true" hx-target="#content">
 	{% for question in latest_questions %}
 		<tr>
 			<td><a href="{% url 'polls_web:detail' question.pk %}">{{ question.question_text }}</a></td>
@@ -23,4 +23,8 @@
 {% else %}
 	<p>No recent polls.</p>
 {% endif %}
+{% endpartialdef %}
+
+{% block content %}
+{% partial content %}
 {% endblock %}

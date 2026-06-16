@@ -1,7 +1,7 @@
 {% extends 'polls_web/base.html' %}
 {% load static %}
 
-{% block content %}
+{% partialdef content %}
 <h1>{{ question.question_text }}</h1>
 
 {% if question.has_expired %}
@@ -22,10 +22,7 @@
 {% endfor %}
 </tbody>
 </table>
-{% endblock %}
 
-{% block scripts %}
-{{ block.super }}
 <script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
 <script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
 <script type="text/javascript">
@@ -38,4 +35,8 @@
 		document.getElementById("choice-vote-counter-" + choice).innerText = votes.toString();
 	}, false);
 </script>
-{% endblock scripts %}
+{% endpartialdef content%}
+
+{% block content %}
+{% partial content %}
+{% endblock %}

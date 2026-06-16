@@ -66,7 +66,6 @@ class PollView(generics.RetrieveAPIView):
 @api_view(['POST'])
 def poll_vote_cast(request, id):
 	try:
-		print(request.data)
 		question = get_object_or_404(PollQuestion, pk=id)
 		choice  = question.choices.get(pk=request.data['choice']) # type: ignore
 	except (KeyError):

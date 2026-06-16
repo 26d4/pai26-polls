@@ -1,7 +1,7 @@
 {% extends 'polls_web/base.html' %}
 
-{% block content %}
-<form action="" method="post">
+{% partialdef content %}
+<form action="{% url 'polls_web:vote-cast' question.id %}" method="post">
 {% csrf_token %}
 <fieldset>
 	<legend><h1>{{ question.question_text }}</h1></legend>
@@ -13,5 +13,9 @@
 </fieldset>
 <input type="submit" value="Vote">
 </form>
-<a href="{% url 'polls_web:results' question.pk %}">Show results</a>
+<a href="{% url 'polls_web:results' question.pk %}" hx-boost="true" hx-target="#content">Show results</a>
+{% endpartialdef %}
+
+{% block content %}
+{% partial content %}
 {% endblock %}
