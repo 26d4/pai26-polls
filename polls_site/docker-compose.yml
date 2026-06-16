@@ -1,0 +1,31 @@
+name: polls_app
+
+services:
+  app:
+    image: app:latest
+    build:
+      context: .
+    volumes:
+      - django_var:/app/var
+    ports:
+      - "80:8000"
+  
+  migrate:
+    image: app:latest
+    build:
+      context: .
+    volumes:
+      - django_var:/app/var
+    command: ["python3", "manage.py", "migrate"]
+  
+  loaddata:
+    image: app:latest
+    build:
+      context: .
+    volumes:
+      - django_var:/app/var
+    command: ["python3", "manage.py", "loaddata", "db.json"]
+
+volumes:
+  django_var:
+

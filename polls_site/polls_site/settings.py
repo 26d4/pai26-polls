@@ -11,6 +11,18 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+def parse_bool(string, default: bool | None = None) -> bool:
+    match str(string).lower().strip():
+        case "1" | "t" | "true" | "p" | "prawda" | "y" | "yes" | "t" | "tak":
+            return True
+        case "0" | "f" | "false" | "falsz" | "fałsz" | "n" | "no" | "nie":
+            return False
+        case _ if default is None:
+            raise ValueError(f"unable to parse bool from '{string}'")
+        case _:
+            return default
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,11 +31,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ya-akiv6gm_4(vg2*ek_)!02c9(=t2iv(way$el_%in8q8hcsb'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = parse_bool(os.environ.get("DJANGO_DEBUG"), True)
+
+# SECURITY WARNING: keep the secret key used in production secret!
+_DEBUG_SECRET_KEY = 'django-insecure-ya-akiv6gm_4(vg2*ek_)!02c9(=t2iv(way$el_%in8q8hcsb'
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", _DEBUG_SECRET_KEY)
+if not DEBUG and SECRET_KEY.startswith("django-insecure"):
+    raise ValueError("missing DJANGO_SECRET_KEY, but DEBUG mode is off")
 
 ALLOWED_HOSTS = []
 
@@ -99,7 +114,7 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'var', 'db.sqlite3'),
     }
 }
 
@@ -127,10 +142,12 @@ AUTH_USER_MODEL = 'polls_api.AppUser'
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:5173',
-    'http://localhost:8000'
-]
+CSRF_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SAMESITE = "Lax" if DEBUG else "Strict"
+CSRF_COOKIE_HTTPONLY = False
+SESSION_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SAMESITE = "Lax" if DEBUG else "Strict"
+SESSION_COOKIE_HTTPONLY = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
