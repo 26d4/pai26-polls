@@ -48,5 +48,6 @@ USER appuser
 EXPOSE 8000
 
 RUN mkdir -p var
+RUN mkdir -p static
 
 CMD ["sh", "entrypoint.sh"]

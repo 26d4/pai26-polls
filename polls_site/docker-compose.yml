@@ -7,7 +7,7 @@ services:
       context: .
     volumes:
       - django_var:/app/var
-      - ./static:/app/static
+      - django_static:/app/static
     ports:
       - "8000:8000"
     environment:
@@ -20,7 +20,7 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./static:/static:ro
+      - django_static:/static:ro
     depends_on:
       - app
   
@@ -42,4 +42,5 @@ services:
 
 volumes:
   django_var:
+  django_static:
 
