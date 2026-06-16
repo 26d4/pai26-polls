@@ -49,4 +49,4 @@ EXPOSE 8000
 
 RUN mkdir -p var
 
-CMD ["daphne", "-b", "0.0.0.0", "polls_site.asgi:application"]
+CMD ["sh", "entrypoint.sh"]
