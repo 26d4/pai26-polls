@@ -14,7 +14,7 @@
 			<a href="{% url 'polls_web:index' %}">Home</a>
 		</div>
 		{% if user.is_authenticated %}
-		{% comment %} <a href="{% url 'polls_web:new' %}">New Poll</a> {% endcomment %}
+		<a href="{% url 'polls_web:new' %}">New Poll</a>
 		<form method="post" action="{% url 'polls_web:logout' %}">
 			{% csrf_token %}
 			<button type="submit">Log out</button>
