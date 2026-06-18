@@ -77,6 +77,7 @@ def poll_vote_cast(request, id):
 		choice.votes = F('votes') + 1
 		choice.save()
 		send_event(f'poll-vote-update-{id}', 'message', {'choice': choice.pk, 'votes': choice.votes})
+		send_event(f'hx-poll-vote-update-{id}', f'choice-{choice.pk}', f'{choice.votes}', json_encode=False)
 		return Response(status=204)
 	
 

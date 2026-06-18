@@ -1,5 +1,4 @@
 {% extends 'polls_web/base.html' %}
-{% load static %}
 
 {% partialdef content %}
 <h1>{{ question.question_text }}</h1>
@@ -13,28 +12,15 @@
 	<th>Choice</th>
 	<th>Votes</th>
 </thead>
-<tbody>
+<tbody hx-ext="sse" sse-connect="{% url "polls_api:events-list" %}hx-poll-vote-update-{{ question.pk }}">
 {% for choice in question.choices.all %}
 	<tr>
 		<td>{{ choice.choice_text }}</td>
-		<td id="choice-vote-counter-{{ choice.pk }}">{{ choice.votes }}</td>
+		<td id="choice-vote-counter-{{ choice.pk }}" sse-swap="choice-{{ choice.pk }}">{{ choice.votes }}</td>
 	</tr>
 {% endfor %}
 </tbody>
 </table>
-
-<script src="{% static 'django_eventstream/eventsource.min.js' %}"></script>
-<script src="{% static 'django_eventstream/reconnecting-eventsource.js' %}"></script>
-<script type="text/javascript">
-	var es = new ReconnectingEventSource('{% url "polls_api:events-list" %}poll-vote-update-{{ question.pk }}/');
-
-	es.addEventListener('message', function (e) {
-		data = JSON.parse(e.data);
-		choice = data.choice;
-		votes = data.votes;
-		document.getElementById("choice-vote-counter-" + choice).innerText = votes.toString();
-	}, false);
-</script>
 {% endpartialdef content%}
 
 {% block content %}

@@ -72,6 +72,7 @@ def vote_cast(request, pk):
 		choice.votes = F('votes') + 1
 		choice.save()
 		send_event(f'poll-vote-update-{pk}', 'message', {'choice': choice.pk, 'votes': choice.votes})
+		send_event(f'hx-poll-vote-update-{pk}', f'choice-{choice.pk}', f'{choice.votes}', json_encode=False)
 		return redirect('polls_web:results', pk=pk)
 
 

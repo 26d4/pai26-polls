@@ -42,6 +42,7 @@ if not DEBUG and SECRET_KEY.startswith("django-insecure"):
 
 ALLOWED_HOSTS = ["*"]
 SECURE_CONTENT_TYPE_NOSNIFF = False
+STATIC_URL = "static/"
 STATIC_ROOT = "static/"
 
 
