@@ -31,6 +31,7 @@ services:
     volumes:
       - django_var:/app/var
     command: ["python3", "manage.py", "migrate"]
+    profiles: [tools]
   
   loaddata:
     image: app:latest
@@ -39,6 +40,7 @@ services:
     volumes:
       - django_var:/app/var
     command: ["python3", "manage.py", "loaddata", "db.json"]
+    profiles: [tools]
 
 volumes:
   django_var:

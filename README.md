@@ -14,5 +14,6 @@ Contents of `polls_site`:
 The app can be started with docker compose:
 
 - set the `DJANGO_SECRET_KEY` env. variable
-- use `run migrate` to apply migrations
-- then use `up app app-proxy`
+- use `docker compose run --rm migrate` to apply migrations
+- optionally load example data with `docker compose run --rm loaddata`
+- then use `docker compose up`
