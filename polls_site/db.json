@@ -1,42 +1,34 @@
 [
 {
-    "model": "sessions.session",
-    "pk": "1la4uo4og1hzsvrpg9pwl42dsna509a9",
-    "fields": {
-        "session_data": ".eJxVjEEOwiAQRe_C2hCgwIBL9z1DMzATqRpISrsy3t026UK3773_32LCbS3T1nmZZhJXocXllyXMT66HoAfWe5O51XWZkzwSedoux0b8up3t30HBXvb1AAwUA_rgcYgejGfjbd6xDoYgZhUBvNWODECyDJlJASjrVFbGJfH5ArfoNqA:1wZGGu:5G4F9o9A5CpTBrCxVWvgRmLsRZN1ZK7sTOURkaqDI1g",
-        "expire_date": "2026-06-29T22:59:12.878Z"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "i1a5ihjh3pbw4q7k9o95g1y2qg9nq33x",
-    "fields": {
-        "session_data": ".eJxVjEEOwiAQRe_C2hCgwIBL9z1DMzATqRpISrsy3t026UK3773_32LCbS3T1nmZZhJXocXllyXMT66HoAfWe5O51XWZkzwSedoux0b8up3t30HBXvb1AAwUA_rgcYgejGfjbd6xDoYgZhUBvNWODECyDJlJASjrVFbGJfH5ArfoNqA:1wZDFf:xoxkzdP6hKxOaae3HU_6NMcXe_voJ_Pwi_Kj4e_tcwI",
-        "expire_date": "2026-06-29T19:45:43.578Z"
-    }
-},
-{
-    "model": "sessions.session",
-    "pk": "zuyeybd6is8srkc4oc69adfioj6j0ep7",
-    "fields": {
-        "session_data": ".eJxVjEEOwiAQRe_C2hCgwIBL9z1DMzATqRpISrsy3t026UK3773_32LCbS3T1nmZZhJXocXllyXMT66HoAfWe5O51XWZkzwSedoux0b8up3t30HBXvb1AAwUA_rgcYgejGfjbd6xDoYgZhUBvNWODECyDJlJASjrVFbGJfH5ArfoNqA:1wZBGL:TVQZRtROl6_wxACy4qQbO4WBY2tHwLFQOIqwdYAC5pM",
-        "expire_date": "2026-06-29T17:38:17.993Z"
-    }
-},
-{
     "model": "polls_api.appuser",
-    "pk": 1,
     "fields": {
-        "password": "pbkdf2_sha256$1200000$EksdboKhbQ4mHyk4C3WbCu$BGgfg4oiWKGhRVrcUdBqyDKmilWw84YlWmKvIX8X+Mc=",
-        "last_login": "2026-06-16T10:56:02.180Z",
+        "password": "pbkdf2_sha256$1200000$OHTcDFX7kR4kHSkuIgWRtd$wef4lyPXl8vDfED3uK1W/sMKx2BzYZI7AF9cl80soew=",
+        "last_login": "2026-06-19T15:57:31.055Z",
         "is_superuser": true,
         "username": "admin",
         "first_name": "",
         "last_name": "",
         "is_staff": true,
         "is_active": true,
-        "date_joined": "2026-06-15T15:11:46.623Z",
+        "date_joined": "2026-06-19T15:35:25.543Z",
         "email": "admin@example.com",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "polls_api.appuser",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$6qZ3XPeekv7C68XouN9gE8$DDEA+RXGZJuKYrSKg+lvAAtbZsTmReX5PfEHFCWXnWs=",
+        "last_login": "2026-06-19T16:01:04.350Z",
+        "is_superuser": false,
+        "username": "jtp",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2026-06-19T15:51:02.788Z",
+        "email": "",
         "groups": [],
         "user_permissions": []
     }
@@ -45,40 +37,36 @@
     "model": "polls_api.pollquestion",
     "pk": 1,
     "fields": {
-        "question_text": "qte",
-        "pub_date": "2026-06-15T14:35:54.233Z",
-        "exp_date": "2026-06-15T16:36:00Z",
-        "owner": null
+        "question_text": "Example Poll",
+        "pub_date": "2026-06-19T15:37:28.222Z",
+        "exp_date": "2027-03-23T23:00:00Z",
+        "owner": [
+            "admin"
+        ]
     }
 },
 {
     "model": "polls_api.pollquestion",
     "pk": 2,
     "fields": {
-        "question_text": "test2",
-        "pub_date": "2026-06-15T14:54:39.247Z",
-        "exp_date": null,
-        "owner": null
+        "question_text": "Another Example",
+        "pub_date": "2026-06-19T15:54:33.041Z",
+        "exp_date": "2026-06-19T23:59:00Z",
+        "owner": [
+            "jtp"
+        ]
     }
 },
 {
     "model": "polls_api.pollquestion",
     "pk": 3,
     "fields": {
-        "question_text": "test",
-        "pub_date": "2026-06-16T10:46:34.795Z",
-        "exp_date": "2026-06-18T00:00:00Z",
-        "owner": null
-    }
-},
-{
-    "model": "polls_api.pollquestion",
-    "pk": 4,
-    "fields": {
-        "question_text": "test",
-        "pub_date": "2026-06-16T10:50:41.171Z",
-        "exp_date": "2026-06-19T00:00:00Z",
-        "owner": null
+        "question_text": "Cats or dogs?",
+        "pub_date": "2026-06-19T15:56:44.730Z",
+        "exp_date": "2026-06-17T21:00:00Z",
+        "owner": [
+            "jtp"
+        ]
     }
 },
 {
@@ -86,8 +74,8 @@
     "pk": 1,
     "fields": {
         "question": 1,
-        "choice_text": "ch1",
-        "votes": 2
+        "choice_text": "Choice A",
+        "votes": 5
     }
 },
 {
@@ -95,7 +83,7 @@
     "pk": 2,
     "fields": {
         "question": 1,
-        "choice_text": "ch2",
+        "choice_text": "Choice B",
         "votes": 1
     }
 },
@@ -103,53 +91,53 @@
     "model": "polls_api.pollchoice",
     "pk": 3,
     "fields": {
-        "question": 2,
-        "choice_text": "asdf",
-        "votes": 11
+        "question": 1,
+        "choice_text": "Choice C",
+        "votes": 10
     }
 },
 {
     "model": "polls_api.pollchoice",
     "pk": 4,
     "fields": {
-        "question": 2,
-        "choice_text": "ghjkl",
-        "votes": 20
+        "question": 1,
+        "choice_text": "Choice D",
+        "votes": 0
     }
 },
 {
     "model": "polls_api.pollchoice",
     "pk": 5,
     "fields": {
-        "question": 3,
-        "choice_text": "HrwoSvyK8au8vk81DhR8oiWquBxjRtGQrzeSCF5MBm62E5qFnwXGJq6cOWRQQB80",
-        "votes": 0
+        "question": 2,
+        "choice_text": "foo",
+        "votes": 1
     }
 },
 {
     "model": "polls_api.pollchoice",
     "pk": 6,
     "fields": {
-        "question": 3,
-        "choice_text": "a",
-        "votes": 0
+        "question": 2,
+        "choice_text": "bar",
+        "votes": 2
     }
 },
 {
     "model": "polls_api.pollchoice",
     "pk": 7,
     "fields": {
-        "question": 3,
-        "choice_text": "d",
-        "votes": 1
+        "question": 2,
+        "choice_text": "baz",
+        "votes": 7
     }
 },
 {
     "model": "polls_api.pollchoice",
     "pk": 8,
     "fields": {
-        "question": 4,
-        "choice_text": "1",
+        "question": 2,
+        "choice_text": "and so on",
         "votes": 0
     }
 },
@@ -157,9 +145,27 @@
     "model": "polls_api.pollchoice",
     "pk": 9,
     "fields": {
-        "question": 4,
-        "choice_text": "2",
+        "question": 2,
+        "choice_text": "and so forth",
         "votes": 0
+    }
+},
+{
+    "model": "polls_api.pollchoice",
+    "pk": 10,
+    "fields": {
+        "question": 3,
+        "choice_text": "Cats",
+        "votes": 1171
+    }
+},
+{
+    "model": "polls_api.pollchoice",
+    "pk": 11,
+    "fields": {
+        "question": 3,
+        "choice_text": "Dogs",
+        "votes": 799
     }
 }
 ]
