@@ -117,10 +117,10 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'var', 'db.sqlite3'),
+        'NAME': BASE_DIR / 'var' / 'db.sqlite3'
     }
 }
-
+DATABASES['default']['NAME'].parent.mkdir(parents=True, exist_ok=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators

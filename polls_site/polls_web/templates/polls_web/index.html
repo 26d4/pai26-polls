@@ -17,7 +17,7 @@
 			<td><a href="{% url 'polls_web:detail' question.pk %}">{{ question.question_text }}</a></td>
 			<td>{{ question.owner }}</td>
 			<td>{{ question.pub_date }}</td>
-			<td>{% if question.exp_date %}{{ question.exp_date }}{% else %}never{% endif %}</td>
+			<td>{{ question.exp_date }}</td>
 		</tr>
 	{% endfor %}
 	</tbody>

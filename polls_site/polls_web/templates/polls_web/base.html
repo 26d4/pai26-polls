@@ -15,18 +15,21 @@
 
 <body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}'>
 	<nav>
-		<div hx-boost="true" hx-target="#content">
+		<span hx-boost="true" hx-target="#content">
 			<a href="{% url 'polls_web:index' %}">Home</a>
-		</div>
+		</span>
 		{% if user.is_authenticated %}
 		<a href="{% url 'polls_web:new' %}">New Poll</a>
-		<form method="post" action="{% url 'polls_web:logout' %}">
+		<form method="post" action="{% url 'polls_web:logout' %}" style="display: inline">
 			{% csrf_token %}
 			<button type="submit">Log out</button>
 		</form>
 		{% else %}
 		<a href="{% url 'polls_web:login' %}">Log in</a>
+		<a href="{% url 'polls_web:register' %}">Register</a>
 		{% endif %}
+		<a href="/admin">Admin</a>
+		User: {{ user }}
 	</nav>
 
 	<hr>

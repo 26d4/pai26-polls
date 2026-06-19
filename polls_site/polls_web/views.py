@@ -1,18 +1,18 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views import generic
 import django.contrib.auth.views as auth_views
 from django.utils.cache import patch_vary_headers
 from django.views.decorators.http import require_POST
 from django.shortcuts import get_object_or_404
 from django.db.models import F
-from django.db import transaction
 from django_eventstream import send_event
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.template import engines
 from django.contrib.auth import get_user_model
 
-from polls_api.models import PollQuestion, PollChoice
+from polls_api.models import PollQuestion
 from .forms import PollQuestionForm, RegisterForm
 
 
@@ -20,7 +20,9 @@ class RegisterView(generic.CreateView):
 	model = get_user_model()
 	form_class = RegisterForm
 	template_name = 'polls_web/register.html'
-	success_url = 'polls_web:index'
+
+	def get_success_url(self) -> str:
+		return reverse('polls_web:index')
 
 
 class LoginView(auth_views.LoginView):
