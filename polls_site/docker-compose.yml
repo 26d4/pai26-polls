@@ -30,7 +30,7 @@ services:
       context: .
     volumes:
       - django_var:/app/var
-    command: ["python3", "manage.py", "loaddata", "db.json"]
+    command: ["sh", "-c", "python3 manage.py migrate && python3 manage.py loaddata db.json"]
     profiles: [tools]
 
 volumes:
