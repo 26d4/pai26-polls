@@ -22,6 +22,7 @@ Incremental==24.11.0
 MarkupSafe==3.0.3
 msgpack==1.2.0
 packaging==26.2
+psycopg2-binary==2.9.12
 pubcontrol==3.5.0
 py-ubjson==0.16.1
 pycparser==3.0

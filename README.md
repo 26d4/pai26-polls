@@ -13,6 +13,6 @@ Contents of `polls_site`:
 
 The app can be started with docker compose:
 
-- set the `DJANGO_SECRET_KEY` env. variable
+- set the necessary env. variables (see `.env.example`)
 - optionally load example data with `docker compose run --rm loaddata`
 - then use `docker compose up`

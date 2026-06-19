@@ -5,14 +5,21 @@ services:
     image: app:latest
     build:
       context: .
+    depends_on:
+      - db
     volumes:
-      - django_var:/app/var
       - django_static:/app/static
     ports:
       - "8000:8000"
     environment:
       - DJANGO_DEBUG=False
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DB_ENGINE=${DB_ENGINE}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
   
   app-proxy:
     image: nginx:latest
@@ -23,17 +30,37 @@ services:
       - django_static:/static:ro
     depends_on:
       - app
+
+  db:
+    image: postgres:18-alpine
+    volumes:
+      - db_data:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - ${DB_PORT}:5432
   
   loaddata:
     image: app:latest
     build:
       context: .
-    volumes:
-      - django_var:/app/var
+    depends_on:
+      - db
+    environment:
+      - DJANGO_DEBUG=False
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DB_ENGINE=${DB_ENGINE}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
     command: ["sh", "-c", "python3 manage.py migrate && python3 manage.py loaddata db.json"]
     profiles: [tools]
 
 volumes:
-  django_var:
   django_static:
+  db_data:
 
