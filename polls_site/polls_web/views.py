@@ -132,10 +132,7 @@ def poll_create(request):
 		form = PollQuestionForm(data, num_choices=int(data['num_choices']))
 
 		if form.is_valid():
-			with transaction.atomic():
-				question = form.save()
-				for choice_text in (v for k, v in form.cleaned_data.items() if k.startswith('choice')):
-					PollChoice.objects.create(choice_text=choice_text, question=question)
+			form.save(owner=request.user, commit=True)
 			return redirect('polls_web:index')
 		else:
 			return render(request, 'polls_web/new.html', {'form': form})

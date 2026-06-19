@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import PollQuestion, PollChoice
 from django.contrib.auth import get_user_model, authenticate
+from django.db.transaction import atomic
 
 User = get_user_model()
 
@@ -68,9 +69,11 @@ class PollQuestionWithChoicesSerializer(PollQuestionSerializer):
 	def create(self, validated_data):
 		choices = validated_data.pop('choices')
 
-		question = PollQuestion.objects.create(**validated_data)
-		for choice in choices:
-			PollChoice.objects.create(question=question, **choice)
+		with atomic():
+			question = PollQuestion.objects.create(**validated_data)
+			for choice in choices:
+				PollChoice.objects.create(question=question, **choice)
+				
 		return question
 
 	class Meta(PollQuestionSerializer.Meta):

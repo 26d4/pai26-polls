@@ -2,6 +2,7 @@ from django import forms
 from polls_api.models import PollChoice, PollQuestion
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.db import transaction
 
 
 class PollQuestionForm(forms.ModelForm):
@@ -20,6 +21,17 @@ class PollQuestionForm(forms.ModelForm):
 		self.initial = {'num_choices': num_choices}
 		for i in range(num_choices):
 			self.fields[f'choice_{i}'] = PollChoice._meta.get_field('choice_text').formfield(label=f'Choice #{i+1}')
+
+	def save(self, commit=True, owner=None):
+		with transaction.atomic():
+			question = super().save(commit=False)
+			question.owner = owner
+			if commit:
+				question.save()
+			choices = [PollChoice(choice_text=v, question=question) for k, v in self.cleaned_data.items() if k.startswith('choice')]
+			if commit:
+				PollChoice.objects.bulk_create(choices)
+		return question, choices
 
 
 class PollChoiceForm(forms.ModelForm):

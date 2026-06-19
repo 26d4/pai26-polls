@@ -7,6 +7,7 @@
 	<table>
 	<thead>
 		<th>Poll</th>
+		<th>Owner</th>
 		<th>Published</th>
 		<th>Expires</th>
 	</thead>
@@ -14,6 +15,7 @@
 	{% for question in latest_questions %}
 		<tr>
 			<td><a href="{% url 'polls_web:detail' question.pk %}">{{ question.question_text }}</a></td>
+			<td>{{ question.owner }}</td>
 			<td>{{ question.pub_date }}</td>
 			<td>{% if question.exp_date %}{{ question.exp_date }}{% else %}never{% endif %}</td>
 		</tr>

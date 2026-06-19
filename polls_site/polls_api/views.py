@@ -84,3 +84,6 @@ def poll_vote_cast(request, id):
 class PollCreateView(generics.CreateAPIView):
 	serializer_class = PollQuestionWithChoicesSerializer
 	permission_classes = [IsAuthenticated]
+
+	def perform_create(self, serializer):
+		return serializer.save(owner=self.request.user)
