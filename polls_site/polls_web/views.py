@@ -10,9 +10,17 @@ from django_eventstream import send_event
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.template import engines
+from django.contrib.auth import get_user_model
 
 from polls_api.models import PollQuestion, PollChoice
-from .forms import PollQuestionForm
+from .forms import PollQuestionForm, RegisterForm
+
+
+class RegisterView(generic.CreateView):
+	model = get_user_model()
+	form_class = RegisterForm
+	template_name = 'polls_web/register.html'
+	success_url = 'polls_web:index'
 
 
 class LoginView(auth_views.LoginView):

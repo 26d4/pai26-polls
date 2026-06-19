@@ -1,5 +1,7 @@
 from django import forms
 from polls_api.models import PollChoice, PollQuestion
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 
 
 class PollQuestionForm(forms.ModelForm):
@@ -24,3 +26,9 @@ class PollChoiceForm(forms.ModelForm):
 	class Meta:
 		model = PollChoice
 		fields = ['choice_text']
+
+
+class RegisterForm(UserCreationForm):
+	class Meta:
+		model = get_user_model()
+		fields = ['username']
