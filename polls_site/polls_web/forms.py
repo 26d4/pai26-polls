@@ -1,5 +1,4 @@
 from django import forms
-# from django.forms import inlineformset_factory
 from polls_api.models import PollChoice, PollQuestion
 
 
@@ -25,6 +24,3 @@ class PollChoiceForm(forms.ModelForm):
 	class Meta:
 		model = PollChoice
 		fields = ['choice_text']
-
-
-# PollChoiceFormSet = inlineformset_factory(PollQuestion, PollChoice, PollChoiceForm, extra=1, can_delete=False)
