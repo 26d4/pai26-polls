@@ -3,11 +3,12 @@
 {% partialdef content %}
 <form method="POST">
 {% csrf_token %}
-<label for="question_text">Question</label>
-<input name="question_text" type="text" required><br>
-<label for="exp_date">Expires</label>
-<input name="exp_date" type="date"><br>
-<div id="replace-me"><button hx-get="/poll-form-choice-row/1" hx-target="#replace-me" hx-swap="outerHTML">Add choice</button></div>
+<table>
+{{ form.as_table }}
+</table>
+<div id="replace-me">
+	<button hx-get="/poll-form-choice-row/1" hx-target="#replace-me" hx-swap="innerHTML">Add choice</button>
+</div>
 <button type="submit">Submit</button>
 </form>
 {% endpartialdef %}
