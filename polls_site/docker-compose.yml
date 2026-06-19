@@ -24,15 +24,6 @@ services:
     depends_on:
       - app
   
-  migrate:
-    image: app:latest
-    build:
-      context: .
-    volumes:
-      - django_var:/app/var
-    command: ["python3", "manage.py", "migrate"]
-    profiles: [tools]
-  
   loaddata:
     image: app:latest
     build:
