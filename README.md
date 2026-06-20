@@ -16,3 +16,5 @@ The app can be started with docker compose:
 - set the necessary env. variables (see `.env.example`)
 - optionally load example data with `docker compose run --rm loaddata`
 - then use `docker compose up`
+
+Example data contains 3 polls and 2 users (`admin:admin` and `jtp:supersecret`)
