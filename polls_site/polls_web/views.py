@@ -134,8 +134,8 @@ def poll_create(request):
 		form = PollQuestionForm(data, num_choices=int(data['num_choices']))
 
 		if form.is_valid():
-			form.save(owner=request.user, commit=True)
-			return redirect('polls_web:index')
+			question, choices = form.save(owner=request.user, commit=True)
+			return redirect('polls_web:detail', pk=question.pk)
 		else:
 			return render(request, 'polls_web/new.html', {'form': form})
 	else:
